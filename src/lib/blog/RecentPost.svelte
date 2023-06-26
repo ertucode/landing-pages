@@ -8,7 +8,7 @@
 </script>
 
 <article class="wrapper">
-	<img {src} alt={post.post.title} />
+	<img loading="lazy" {src} alt={post.post.title} />
 	<div class="content">
 		<Tags tags={post.post.tags} />
 		<h2>{post.post.title}</h2>

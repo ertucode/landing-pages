@@ -24,6 +24,7 @@
 	main {
 		margin: 0 auto;
 		max-width: var(--max-width);
+		padding-bottom: 12rem;
 	}
 
 	#blog-wrapper {

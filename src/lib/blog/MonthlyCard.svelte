@@ -33,6 +33,7 @@
 		height: 100%;
 		box-shadow: -2rem 0 3rem -2rem #000;
 		min-width: 300px;
+		position: relative;
 	}
 
 	.date {

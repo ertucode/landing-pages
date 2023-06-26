@@ -14,17 +14,32 @@
 	ul {
 		list-style: none;
 		display: flex;
-		gap: 1rem;
 		text-transform: uppercase;
 		font-weight: 700;
 		font-size: 0.85rem;
 		padding: 0;
 	}
 	a {
-		color: var(--link-color);
+		background-color: var(--link-color);
+		position: relative;
+		--indent-size: 0.6rem;
+		clip-path: polygon(
+			calc(100% - var(--indent-size)) 0,
+			100% 50%,
+			calc(100% - var(--indent-size)) 100%,
+			0% 100%,
+			var(--indent-size) 50%,
+			0% 0%
+		);
+		padding-inline: 1rem;
+		color: white;
 	}
 	a:hover {
 		opacity: 0.6;
 		cursor: pointer;
+	}
+
+	li:not(:first-child) {
+		margin-left: -0.3rem;
 	}
 </style>
