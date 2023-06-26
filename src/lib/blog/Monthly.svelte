@@ -1,25 +1,9 @@
 <script lang="ts">
 	import MonthlyCard from './MonthlyCard.svelte';
-	import { fetchFake, type FetchFake } from './fetch/fetchFake';
-	import type { IMonthlyCard } from './monthly-card';
+	import type { FetchFake } from './fetch/fetchFake';
 
 	export let title: string;
-
-	const fetchPosts = (async (): Promise<IMonthlyCard[]> => {
-		const usersAndPosts = await fetchFake.postWithUser(10);
-
-		return usersAndPosts.map(({ user, post }) => {
-			return {
-				author: {
-					name: `${user.firstName} ${user.lastName}`,
-					imgSrc: user.image
-				},
-				date: new Date(),
-				tags: post.tags,
-				title: post.title
-			};
-		});
-	})();
+	export let posts: FetchFake.UserWithPost[];
 </script>
 
 <article>
@@ -28,18 +12,13 @@
 			{title}
 		</h2>
 	</div>
-
-	{#await fetchPosts}
-		loading
-	{:then posts}
-		<div class="cards-container">
-			{#each posts as post}
-				<div class="month-wrapper">
-					<MonthlyCard card={post} />
-				</div>
-			{/each}
-		</div>
-	{/await}
+	<div class="cards-container">
+		{#each posts as post}
+			<div class="month-wrapper">
+				<MonthlyCard {post} />
+			</div>
+		{/each}
+	</div>
 </article>
 
 <style>

@@ -1,24 +1,22 @@
 <script lang="ts">
 	import '../app.css';
 	import Navbar from '$lib/blog/Navbar.svelte';
-	import { pages } from '../lib/constants';
 	import Featured from '$lib/blog/Featured.svelte';
 	import Monthly from '$lib/blog/Monthly.svelte';
 	import RecentPosts from '$lib/blog/RecentPosts.svelte';
 
-	const ps = pages;
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 </script>
 
 <div id="blog-wrapper">
 	<Navbar />
 	<main>
-		<section>
-			<Featured />
-		</section>
-		<section>
-			<Monthly title="Popular this month" />
-		</section>
-		<section><RecentPosts /></section>
+		<section><Featured post={data.featured} /></section>
+		<section><Monthly title="Popular this month" posts={data.monthly} /></section>
+		<section><RecentPosts posts={data.recent} /></section>
+		<section><Monthly title="The monthly mixup" posts={data.mixup} /></section>
 	</main>
 </div>
 

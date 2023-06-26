@@ -1,7 +1,6 @@
-
 export const pages = [
-    {
-        href: 'blog',
-        label: 'Blog'
-    }
-]
+	{
+		href: 'blog',
+		label: 'Blog'
+	}
+];

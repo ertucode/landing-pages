@@ -1,14 +1,11 @@
 <script lang="ts">
 	import postImg from '$lib/blog/assets/featured-post.png';
+	import { fullName } from '$lib/utils/full-name';
 	import ProfileSection from './ProfileSection.svelte';
-	import featuredProfile from '$lib/blog/assets/featured-profile.webp';
 	import Tags from './Tags.svelte';
-	import { fetchFake } from './fetch/fetchFake';
+	import type { FetchFake } from './fetch/fetchFake';
 
-	const post = {
-		topics: ['productivity', 'ide'],
-		title: 'Why you should use neovim?'
-	};
+	export let post: FetchFake.UserWithPost;
 </script>
 
 <div class="featured-card">
@@ -17,11 +14,11 @@
 	</div>
 	<div class="summary">
 		<header>
-			<Tags tags={post.topics} />
+			<Tags tags={post.post.tags} />
 			<!-- svelte-ignore a11y-missing-attribute -->
 			<a>
 				<h2>
-					{post.title}
+					{post.post.title}
 				</h2>
 			</a>
 		</header>
@@ -33,7 +30,11 @@
 			molestias error nam?
 		</p>
 		<div class="profile">
-			<ProfileSection date={new Date()} imgSrc={featuredProfile} name="John Johnson" />
+			<ProfileSection
+				date={new Date()}
+				imgSrc={post.user.image}
+				name={fullName(post.user.firstName, post.user.lastName)}
+			/>
 		</div>
 	</div>
 </div>

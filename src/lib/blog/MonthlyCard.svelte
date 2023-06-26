@@ -1,19 +1,23 @@
 <script lang="ts">
 	import { dateString } from '$lib/utils/date-string';
+	import { fullName } from '$lib/utils/full-name';
 	import ProfileSection from './ProfileSection.svelte';
 	import Tags from './Tags.svelte';
-	import type { IMonthlyCard } from './monthly-card';
+	import type { FetchFake } from './fetch/fetchFake';
 
-	export let card: IMonthlyCard;
+	export let post: FetchFake.UserWithPost;
 </script>
 
 <div class="wrapper">
-	<div class="date">{dateString(card.date)}</div>
-	<h3>{card.title}</h3>
+	<div class="date">{dateString(new Date())}</div>
+	<h3>{post.post.title}</h3>
 	<div class="mt-auto">
-		<Tags tags={card.tags} />
+		<Tags tags={post.post.tags} />
 	</div>
-	<ProfileSection imgSrc={card.author.imgSrc} name={card.author.name} />
+	<ProfileSection
+		imgSrc={post.user.image}
+		name={fullName(post.user.firstName, post.user.lastName)}
+	/>
 </div>
 
 <style>
