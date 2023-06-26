@@ -26,10 +26,30 @@ const makeFetcher =
 		return res;
 	};
 
+const fetchUserOfPost = async (
+	post: FetchFake.Post
+): Promise<FetchFake.UserWithPost | undefined> => {
+	const user = await fetchFake.users(post.userId);
+	if (!user) return;
+
+	return {
+		post,
+		user
+	};
+};
+
 export const fetchFake = {
 	$,
 	users: makeFetcher<'users', FetchFake.User>('users'),
-	posts: makeFetcher<'posts', FetchFake.Post>('posts')
+	posts: makeFetcher<'posts', FetchFake.Post>('posts'),
+	postWithUser: async (count: number) => {
+		const fetched = await fetchFake.posts();
+		if (!fetched) return [];
+
+		return (await Promise.all(fetched.map((post) => fetchUserOfPost(post))))
+			.filter((res): res is FetchFake.UserWithPost => res !== undefined)
+			.slice(0, count);
+	}
 };
 
 export namespace FetchFake {
@@ -46,5 +66,10 @@ export namespace FetchFake {
 		body: string;
 		tags: string[];
 		userId: number;
+	};
+
+	export type UserWithPost = {
+		user: FetchFake.User;
+		post: FetchFake.Post;
 	};
 }

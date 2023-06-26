@@ -1,20 +1,3 @@
-<script context="module" lang="ts">
-	type UserWithPost = {
-		user: FetchFake.User;
-		post: FetchFake.Post;
-	};
-
-	const fetchUserOfPost = async (post: FetchFake.Post): Promise<UserWithPost | undefined> => {
-		const user = await fetchFake.users(post.userId);
-		if (!user) return;
-
-		return {
-			post,
-			user
-		};
-	};
-</script>
-
 <script lang="ts">
 	import MonthlyCard from './MonthlyCard.svelte';
 	import { fetchFake, type FetchFake } from './fetch/fetchFake';
@@ -23,12 +6,7 @@
 	export let title: string;
 
 	const fetchPosts = (async (): Promise<IMonthlyCard[]> => {
-		const fetched = await fetchFake.posts();
-		if (!fetched) return [];
-
-		const usersAndPosts = (await Promise.all(fetched.map((post) => fetchUserOfPost(post))))
-			.filter((res): res is UserWithPost => res !== undefined)
-			.slice(0, 10);
+		const usersAndPosts = await fetchFake.postWithUser(10);
 
 		return usersAndPosts.map(({ user, post }) => {
 			return {
@@ -78,7 +56,6 @@
 	article {
 		display: grid;
 		grid-template-columns: 16rem 1fr;
-		margin-top: var(--gap);
 	}
 
 	.title::before {

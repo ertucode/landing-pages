@@ -19,9 +19,6 @@
 </header>
 
 <style>
-	header {
-		margin-bottom: var(--gap);
-	}
 	nav {
 		background-color: black;
 		color: white;
