@@ -5,7 +5,8 @@
 <ul>
 	{#each tags as tag}
 		<!-- svelte-ignore a11y-missing-attribute -->
-		<li><a>{tag}</a></li>
+		<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+		<li><a tabindex="0">{tag}</a></li>
 	{/each}
 </ul>
 

@@ -10,7 +10,9 @@
 
 <div class="wrapper">
 	<div class="date">{dateString(new Date())}</div>
-	<h3>{post.post.title}</h3>
+	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+	<!-- svelte-ignore a11y-missing-attribute -->
+	<a tabindex="0"><h3>{post.post.title}</h3></a>
 	<div class="mt-auto">
 		<Tags tags={post.post.tags} />
 	</div>

@@ -8,7 +8,8 @@
 
 <div class="wrapper">
 	<!-- svelte-ignore a11y-missing-attribute -->
-	<a>
+	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+	<a tabindex="0">
 		{#if imgSrc}
 			<img class="round" src={imgSrc} alt="profile" />
 		{:else}
@@ -16,7 +17,8 @@
 		{/if}
 	</a>
 	<!-- svelte-ignore a11y-missing-attribute -->
-	<a><div class="name">{name}</div></a>
+	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+	<a tabindex="0"><div class="name">{name}</div></a>
 	{#if date}
 		<div class="date">{dateString(date)}</div>
 	{/if}

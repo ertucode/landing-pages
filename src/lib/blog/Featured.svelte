@@ -16,7 +16,8 @@
 		<header>
 			<Tags tags={post.post.tags} />
 			<!-- svelte-ignore a11y-missing-attribute -->
-			<a>
+			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+			<a tabindex="0">
 				<h2>
 					{post.post.title}
 				</h2>
